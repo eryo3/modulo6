@@ -67,7 +67,7 @@ exports.answer = function(req, res) {
 
 // GET /quizes/author
 exports.author = function(req, res) {
-	res.render('quizes/author', {errors: []});
+	res.render('quizes/author', {title: 'Créditos', errors: []});
 
 };
 
@@ -116,5 +116,14 @@ exports.update = function(req, res){
 	req.quiz
 			.save({fields: ["pregunta", "respuesta"]})
 			.then( function() {res.redirect('/quizes');});				
-	}
+};
+
+// DELETE /quizes/:id
+
+exports.destroy = function(req, res) {
+	req.quiz.destroy().then(function() {
+		res.redirect('/quizes');
+	}).catch(function (error){next(error)});
+
+};
 		
