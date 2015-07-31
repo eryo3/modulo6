@@ -82,20 +82,19 @@ exports.new = function(req, res) {
 
 // POST /quizes/create
 exports.create = function(req, res) {
+	
+	
+	req.body.quiz.tema=req.body.tem;
+	console.log(req.body.quiz);
 	var quiz = models.Quiz.build(req.body.quiz);
 
-	quiz.validate().then(function (err){
-		if (err) {
-			res.render('quizes/new', {quiz: quiz, errors: err.errors});
+	// guarda en DB los campos pregunta y respuesta de Quiz
+	quiz.save({fields: ["pregunta", "respuesta", "tema"]}).then(function() {
+		res.redirect('/quizes');
+	}) // redireccion HTTP a lista de preguntas
 
-		} else {
-			// guarda en DB los campos pregunta y respuesta de Quiz
-			quiz.save({fields: ["pregunta", "respuesta"]}).then(function() {
-				res.redirect('/quizes');
-			}) // redireccion HTTP a lista de preguntas
+		
 
-		}
-	});
 	
 };
 
@@ -112,6 +111,8 @@ exports.edit = function(req, res) {
 exports.update = function(req, res){
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.tema = req.body.quiz.tema;
+	console.log(req.quiz);
 
 	req.quiz
 			.save({fields: ["pregunta", "respuesta"]})
