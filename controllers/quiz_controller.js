@@ -2,10 +2,13 @@ var models = require('../models/models.js');
 
 // Autoload - factoriza el codigo si ruta inclute :quizId
 exports.load = function(req, res, next, quizId) {
-	models.Quiz.find(quizId).then(
+	models.Quiz.find({
+		where: {id: Number(quizId)},
+		include: [{model: models.Comment}]
+	}).then(
 		function(quiz) {
 			if (quiz) {
-				req.quiz = quiz;
+				req.quiz = quiz; 	
 				next();
 			} else {
 				next(new Error('No existe quizId=' + quizId));

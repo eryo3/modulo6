@@ -7,11 +7,11 @@
 <p>
 	<label for="tem" class="rem">Temática:</label>
 	<select name="tem" id="tem">
- 		<option value="Otro" selected="selected">Otro</option>
-  		<option value="Humanidades">Humanidades</option>
-  		<option value="Ocio">Ocio</option>
-  		<option value="Ciencia">Ciencia</option>
-  		<option value="Tecnologia">Tecnología</option>
+ 		<option value="Otro"  <% if (quiz.tema==='Otro')        { %> selected <% } %> >Otro</option>
+  		<option value="Humanidades"  <% if (quiz.tema==='Humanidades')        { %> selected <% } %> >Humanidades</option>
+  		<option value="Ocio"  <% if (quiz.tema==='Ocio')        { %> selected <% } %> >Ocio</option>
+  		<option value="Ciencia"  <% if (quiz.tema==='Ciencia')        { %> selected <% } %> >Ciencia</option>
+  		<option value="Tecnologia"  <% if (quiz.tema==='Tecnologia')        { %> selected <% } %> >Tecnología</option>
 	</select>
 </p><br/>
 
