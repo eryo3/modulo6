@@ -12,6 +12,7 @@ router.get('/', function(req, res) {
 
 //Autoload de comandos con :quizId
 router.param('quizId', quizController.load); // AUTOLOAD :quizId
+router.param('commentId', commentController.load); // AUTOLOAD :commentId
 
 /*router.get('/quizes/question', quizController.question);
 router.get('/quizes/answer', quizController.answer);*/
@@ -33,5 +34,5 @@ router.get('/logout', sessionController.destroy);
 
 router.get('/quizes/:quizId(\\d+)/comments/new', commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments', commentController.create);
-
+router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 module.exports = router;
